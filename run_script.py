@@ -7,12 +7,13 @@ import loss
 X = tf.placeholder(tf.float32, shape=(None, n_inputs), name="X")
 y = tf.placeholder(tf.int32, shape=(None), name="y")
 
-encoder = enc.Encoder(n_layers=2, n_neurons=25, activation=tf.nn.relu, latent_size=10)
-decoder = dec.Decoder(n_layers=2, n_neurons=25, activation=tf.nn.relu, output_size=28*28)
-loss = loss.Loss(loss_type='mse')
+encoder = enc.Encoder(inputs=X, n_layers=2, n_neurons=25, activation=tf.nn.relu, latent_size=10)
+z = encoder.get_latent_representation()
 
-z = encoder.get_latent_representation(inputs=X)
-Xhat = decoder.get_outputs(z)
+decoder = dec.Decoder(inputs=z, n_layers=2, n_neurons=25, activation=tf.nn.relu, output_size=28*28)
+Xhat = decoder.get_outputs()
+
+loss = loss.Loss(loss_type='mse')
 mse = loss.get_loss(target=X, prediction=Xhat)
 
 learning_rate = 0.01

@@ -1,15 +1,16 @@
+"""
+Decoders for autoencoder or variational autoencoder models
+"""
+
 import tensorflow as tf
 import util
 
 
-class Decoder():
-    def __init__(self, n_layers, n_neurons, activation, output_size):
-        self._n_layers = n_layers
-        self._n_neurons = n_neurons
-        self._activation = activation
-        self._output_size = output_size
+class Decoder(object):
+    def __init__(self, inputs, n_layers, n_neurons, activation, output_size, name='decoder'):
+        with tf.name_scope(name):
+            self._decoding = util.build_neural_net(input=inputs, n_layers=n_layers, n_neurons=n_neurons,
+                                                   activation=activation, n_outputs=output_size)
 
-    def get_outputs(self, inputs):
-        output = util.build_neural_net(input=inputs, n_layers=self._n_layers, n_neurons=self._n_neurons,
-                                       activation=self._activation, n_outputs=self._output_size)
-        return output
+    def get_outputs(self):
+        return self._decoding
