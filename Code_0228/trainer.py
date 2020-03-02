@@ -181,11 +181,66 @@ class Trainer(object):
             print("SNR = 13 test accuracy is: ", 100000 * Accuracy_SNR_13)
             np.save('SNR13_Accuracy', 100000 * Accuracy_SNR_13)
 
+            Accuracy_SNR_14 = 0
+            for X_test_batch, y_test_batch in self._dataset.shuffle_batch(data['X_test'], data['y_test'], 100):
+                Accuracy_SNR_14 += 100 * accuracy.eval(feed_dict={self._model.X: X_test_batch, self._model.Noise: 0.3078})
+            Accuracy_SNR_14 = 100 * Accuracy_SNR_14 / TEST_MESS
+            print("SNR = 14 test accuracy is: ", 100000 * Accuracy_SNR_14)
+            np.save('SNR14_Accuracy', 100000 * Accuracy_SNR_14)
+
+            Accuracy_SNR_15 = 0
+            for X_test_batch, y_test_batch in self._dataset.shuffle_batch(data['X_test'], data['y_test'], 100):
+                Accuracy_SNR_15 += 100 * accuracy.eval(feed_dict={self._model.X: X_test_batch, self._model.Noise: 0.2973})
+            Accuracy_SNR_15 = 100 * Accuracy_SNR_15 / TEST_MESS
+            print("SNR = 15 test accuracy is: ", 100000 * Accuracy_SNR_15)
+            np.save('SNR15_Accuracy', 100000 * Accuracy_SNR_15)
+
+            Accuracy_SNR_16 = 0
+            for X_test_batch, y_test_batch in self._dataset.shuffle_batch(data['X_test'], data['y_test'], 100):
+                Accuracy_SNR_16 += 100 * accuracy.eval(feed_dict={self._model.X: X_test_batch, self._model.Noise: 0.287})
+            Accuracy_SNR_16 = 100 * Accuracy_SNR_16 / TEST_MESS
+            print("SNR = 16 test accuracy is: ", 100000 * Accuracy_SNR_16)
+            np.save('SNR16_Accuracy', 100000 * Accuracy_SNR_16)
+
+            Accuracy_SNR_17 = 0
+            for X_test_batch, y_test_batch in self._dataset.shuffle_batch(data['X_test'], data['y_test'], 100):
+                Accuracy_SNR_17 += 100 * accuracy.eval(feed_dict={self._model.X: X_test_batch, self._model.Noise: 0.2774})
+            Accuracy_SNR_17 = 100 * Accuracy_SNR_17 / TEST_MESS
+            print("SNR = 17 test accuracy is: ", 100000 * Accuracy_SNR_17)
+            np.save('SNR17_Accuracy', 100000 * Accuracy_SNR_17)
+
+            Accuracy_SNR_18 = 0
+            for X_test_batch, y_test_batch in self._dataset.shuffle_batch(data['X_test'], data['y_test'], 100):
+                Accuracy_SNR_18 += 100 * accuracy.eval(feed_dict={self._model.X: X_test_batch, self._model.Noise: 0.2679})
+            Accuracy_SNR_18 = 100 * Accuracy_SNR_18 / TEST_MESS
+            print("SNR = 18 test accuracy is: ", 100000 * Accuracy_SNR_18)
+            np.save('SNR18_Accuracy', 100000 * Accuracy_SNR_18)
+
+
+            Accuracy_SNR_19 = 0
+            for X_test_batch, y_test_batch in self._dataset.shuffle_batch(data['X_test'], data['y_test'], 100):
+                Accuracy_SNR_19 += 100 * accuracy.eval(feed_dict={self._model.X: X_test_batch, self._model.Noise: 0.2588})
+            Accuracy_SNR_19 = 100 * Accuracy_SNR_19 / TEST_MESS
+            print("SNR = 19 test accuracy is: ", 100000 * Accuracy_SNR_19)
+            np.save('SNR19_Accuracy', 100000 * Accuracy_SNR_19)
+
+            Accuracy_SNR_20 = 0
+            for X_test_batch, y_test_batch in self._dataset.shuffle_batch(data['X_test'], data['y_test'], 100):
+                Accuracy_SNR_20 += 100 * accuracy.eval(feed_dict={self._model.X: X_test_batch, self._model.Noise: 0.25})
+            Accuracy_SNR_20 = 100 * Accuracy_SNR_20 / TEST_MESS
+            print("SNR = 20 test accuracy is: ", 100000 * Accuracy_SNR_20)
+            np.save('SNR20_Accuracy', 100000 * Accuracy_SNR_20)
+
+            Accuracy_SNR_21 = 0
+            for X_test_batch, y_test_batch in self._dataset.shuffle_batch(data['X_test'], data['y_test'], 100):
+                Accuracy_SNR_21 += 100 * accuracy.eval(feed_dict={self._model.X: X_test_batch, self._model.Noise: 0.24})
+            Accuracy_SNR_21 = 100 * Accuracy_SNR_21 / TEST_MESS
+            print("SNR = 21 test accuracy is: ", 100000 * Accuracy_SNR_21)
+            np.save('SNR21_Accuracy', 100000 * Accuracy_SNR_21)
+
             #Constellation
-            for X_cons_batch, y_cons in self._dataset.shuffle_batch(data['X_cons'], data['X_cons'], 20):
-                signal_cons = self._model.get_para().eval(feed_dict={self._model.X: X_cons_batch, self._model.Noise: 0.5})
+            #for X_cons_batch, y_cons in self._dataset.shuffle_batch(data['X_cons'], data['X_cons'], 20):
+            signal_cons = self._model.get_para().eval(feed_dict={self._model.X: data['X_cons'], self._model.Noise: 0.5})
             np.save('Signal_Costillation', signal_cons)
-            #print("signal_cons shape is: ", signal_cons.shape)
-            #print("signal_cons is: ", signal_cons)
 
             #accuracy.eval()
