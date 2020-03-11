@@ -11,8 +11,15 @@ print("n1 is: ", n1)
 data = np.load('Signal_Costillation.npy')
 print(data)
 print(data.shape)
-data = np.reshape(data, (1, 244*104))
-np.savetxt('data_0309.csv', data, delimiter=',')
+real = data[:,:,6*4:6*4+4]
+real=np.reshape(real, (1, 256*4))
+image = data[:,:,19*4:19*4+4]
+image=np.reshape(image, (1, 256*4))
+
+concate = np.concatenate((real, image), axis=1)
+
+#data = np.reshape(data, (1, 16*2))
+np.savetxt('data_0311_1.csv', concate, delimiter=',')
 
 # Test save and load
 """
