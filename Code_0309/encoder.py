@@ -132,6 +132,38 @@ class Encoder(object):
             #self._encoding = self._complex
 
             # Normalization
+            '''
+            # Unit Circle Normalization
+            power1 = tf.math.abs(self._complex)
+
+            real = tf.math.real(self._complex)
+            imag = tf.math.imag(self._complex)
+            power1 = power1 + 1e-8
+            real = tf.math.divide(real, power1)
+            imag = tf.math.divide(imag, power1)
+            self._encoding = tf.complex(real, imag)
+            '''
+
+
+            # Power Constraint Normalization
+            power1 = tf.math.square(tf.math.abs(self._complex))
+            # print("power shape is: ", power1.shape)
+            # power = tf.math.square(power)
+            power2 = tf.math.sqrt(tf.reduce_mean(power1, axis=2, keepdims=True))
+            # power = tf.math.sqrt(power)
+
+            real = tf.math.real(self._complex)
+            imag = tf.math.imag(self._complex)
+            power2 = power2 + 1e-8
+            real = tf.math.divide(real, power2)
+            imag = tf.math.divide(imag, power2)
+
+            self._encoding = tf.complex(real, imag)
+
+
+
+            '''
+            # average energy Normalization
             power1 = tf.math.square(tf.math.abs(self._complex))
             #print("power shape is: ", power1.shape)
             # power = tf.math.square(power)
@@ -145,6 +177,7 @@ class Encoder(object):
             imag = tf.math.divide(imag, power2)
 
             self._encoding = tf.complex(real, imag)
+            '''
 
             # mean, variance = tf.nn.moments(self._complex, 2, keep_dims=True)
             # variance = variance+1e-8
