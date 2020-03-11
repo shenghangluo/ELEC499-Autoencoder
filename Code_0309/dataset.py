@@ -33,16 +33,22 @@ class DatasetMNIST(object):
         # X_valid_all = np.zeros((VALID_MESS, 1, 256))
         # X_test_all = np.zeros((TEST_MESS, 1, 256))
 
-        X_cons = np.zeros((244, 13, 256))
+        X_cons = np.zeros((M, group_num, M))
+        k=0
+        for i in range(M):
+            X_cons[i, 6, :] = X_train[k, :, :]
+            k += 1
+        
+        #X_cons = np.zeros((244, 13, 256))
         #k=0
-        for i in range(20):
-            k = i
-            for j in range(group_num):
-                if k > 255:
-                    X_cons[i, j, :] = 0
-                else:
-                    X_cons[i, j, :] = X_train[k, :, :]
-                k += 1
+        #for i in range(20):
+        #    k = i
+        #    for j in range(group_num):
+        #        if k > 255:
+        #            X_cons[i, j, :] = 0
+        #        else:
+        #            X_cons[i, j, :] = X_train[k, :, :]
+        #        k += 1
 
         X_train_final = np.zeros((TRAIN_MESS, 13, 256))
         for i in range(TRAIN_MESS):
